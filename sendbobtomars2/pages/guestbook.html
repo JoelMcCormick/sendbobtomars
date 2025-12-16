@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Guestbook</title>
+<style>
+  :root {
+    --bg: #0b0d12;
+    --panel: #111522;
+    --panel2: #0f1320;
+    --text: #e7e9ee;
+    --muted: #a4acbd;
+    --border: rgba(255,255,255,.09);
+    --accent: #7aa2ff;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
+    --radius: 16px;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    background: radial-gradient(1200px 700px at 20% -10%, rgba(122,162,255,.20), transparent 60%),
+                radial-gradient(900px 600px at 90% 0%, rgba(255,122,200,.10), transparent 55%),
+                var(--bg);
+    color: var(--text);
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 24px 16px 60px; }
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    backdrop-filter: blur(10px);
+    background: linear-gradient(to bottom, rgba(11,13,18,.92), rgba(11,13,18,.55));
+    border-bottom: 1px solid var(--border);
+  }
+  .head-inner { max-width: 980px; margin: 0 auto; padding: 18px 16px; display: grid; gap: 10px; }
+  .title-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  h1 { margin: 0; font-size: 20px; letter-spacing: .2px; }
+  .sub { color: var(--muted); font-size: 13px; }
+  .controls { display: grid; grid-template-columns: 1fr auto auto; gap: 10px; }
+  @media (max-width: 720px) {
+    .controls { grid-template-columns: 1fr; }
+  }
+  .input, .select, .btn {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(17,21,34,.75);
+    color: var(--text);
+    outline: none;
+  }
+  .input:focus, .select:focus {
+    border-color: rgba(122,162,255,.55);
+    box-shadow: 0 0 0 4px rgba(122,162,255,.16);
+  }
+  .btn {
+    cursor: pointer;
+    background: rgba(122,162,255,.18);
+  }
+  .btn:hover {
+    background: rgba(122,162,255,.24);
+  }
+  .feed { margin-top: 18px; display: grid; gap: 14px; }
+  .card {
+    background: linear-gradient(180deg, rgba(17,21,34,.92), rgba(15,19,32,.92));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .card-inner { padding: 14px 14px 12px; }
+  .meta {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 12px;
+    align-items: start;
+  }
+  .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(122,162,255,.22);
+    border: 1px solid rgba(122,162,255,.35);
+    display: grid;
+    place-items: center;
+    font-family: var(--mono);
+    font-size: 14px;
+    color: var(--text);
+    user-select: none;
+  }
+  .who { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap; }
+  .who .id { color: var(--muted); font-family: var(--mono); font-size: 12px; }
+  .who .name { font-weight: 650; }
+  .who .loc { color: var(--muted); font-size: 13px; }
+  .email { margin-top: 3px; color: var(--muted); font-size: 12px; }
+  .time { margin-top: 6px; color: var(--muted); font-size: 12px; font-family: var(--mono); }
+  hr.sep {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 12px 0 10px;
+  }
+  .content {
+    white-space: pre-wrap;
+    line-height: 1.45;
+    font-size: 14px;
+  }
+  .reply-wrap {
+    margin-top: 12px;
+    padding-left: 52px;
+    display: grid;
+    gap: 10px;
+  }
+  .reply {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 14px;
+    padding: 10px 12px;
+  }
+  .reply .rwho {
+    color: var(--muted);
+    font-size: 12px;
+    font-family: var(--mono);
+    margin-bottom: 6px;
+  }
+  .reply .rtext {
+    white-space: pre-wrap;
+    line-height: 1.45;
+    font-size: 13.5px;
+  }
+  .empty {
+    padding: 18px 14px;
+    color: var(--muted);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    background: rgba(17,21,34,.45);
+  }
+  footer {
+    margin-top: 22px;
+    color: var(--muted);
+    font-size: 12px;
+  }
+  .kbd {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.03);
+  }
+  .navStrip{
+  width: 100%;
+  text-align: center;
+  font-size: 130%;
+  }
+</style>
+</head>
+<body>
+<header>
+  <nav class="navStrip" aria-label="Top navigation">
+    <span><a href="../index.html">Home</a></span>
+    <span> | </span><a href="sendbob.html">Send Bob!</a>
+    <span> | </span><a href="mysheep.html">My Sheep</a>
+    <span> | </span><a href="packinglist.html">Packing List</a>
+    <span> | </span><a href="why.html">WHY?</a>
+    <span> | </span><a href="masterplanfinalfinal.html">My Plan</a>
+    <span> | </span><a href="packinglist.html">Page Title</a>
+    <span> | </span><a href="bloog.html">Journal/Blog</a>    </nav>
+    <hr class="sep"/>
+  <div class="head-inner">
+    <div class="title-row">
+      <div>
+        <h1>Guestbook</h1>
+        <div class="sub">Message from the future: New comments have been disabled to preserve the timestream.  <br>The various archived versions of the guestbook didn't contain a complete set of guestbook entries and none of them show the final state of the page before the domain expired.<br>  
+          However, by some twist of fate, the way Bob structured the site files allowed me to consolidate the entire set from unpublished pages.
+          <br>Thanks Bob! <br>(Or whichever of your sheep hacked your computer to reconfigure your php files behind your back. Lookin' at you Pooky...) 
+          </div>
+      </div>
+      <div class="sub">Tip: press <span class="kbd">/</span> to focus search</div>
+    </div>
+    <div class="controls">
+      <input id="q" class="input" type="search" placeholder="Search name, location, email, content, replies" autocomplete="off"/>
+      <select id="sort" class="select">
+        <option value="new">Newest first</option>
+        <option value="old">Oldest first</option>
+        <option value="idDesc">Comment # high to low</option>
+        <option value="idAsc">Comment # low to high</option>
+      </select>
+      <button id="clear" class="btn" type="button">Clear</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="feed" class="feed" aria-live="polite"></div>
+  <footer>
+    <div style="margin-top:10px">this site is a faithful reproduction of sendbobtomars.com dedicated to the memory of its original author.  <p><a href="../misc/guestbookPlaintext.html">Plaintext Archive of Guestbook Comments</a></p></div>
+  </footer>
+</main>
+
+<script>
+const COMMENTS = [{"id": 62, "name": "Christian", "email": "", "location": "Germany", "datetime": "Saturday, October 30, 2004 13:12", "datetimeIso": "2004-10-30T13:12:00", "content": "Moin Wenn der Tag immer mit Eurer super gestaltetetn und informativen HP anfangen koennte, waere ich mehr als gluecklich. Von nun an werdet Ihr einen treuen Besucher mehr haben. Macht nur weiterso, ich werde auch meinen Freunden von Euch erzaehlen. MFG neue casinos internet casinos ordentliche internet casinos", "replies": []}, {"id": 61, "name": "Cutch", "email": "", "location": "Canterbury Park", "datetime": "Thursday, October 28, 2004 00:16", "datetimeIso": "2004-10-28T00:16:00", "content": "Hey Bob. I'll miss you so.\nPlease don't go. We'll eat you up, we love you so.\n\nWords cannot explain the zillions of things that will remind me of you. The creative things you said and did. The way you made me laugh. The ways you made me think. The insights on life. The childish heart you always had. It was my pleasure to know you for such a short time. Seemed like a lifetime.\n\nYou will be missed more than you could ever imagine.\n\nBye Bob. See you again someday.......", "replies": []}, {"id": 60, "name": "Mr. Lord, Esq.", "email": "", "location": "London", "datetime": "Wednesday, October 27, 2004 17:18", "datetimeIso": "2004-10-27T17:18:00", "content": "hello visitors to Mars. I've left a little paragraph on my blog in memory of our dear friend Bob. if you wanna see it, go right ahead.", "replies": []}, {"id": 59, "name": "Mr. Lord, Esq.", "email": "", "location": "London", "datetime": "Wednesday, October 27, 2004 17:09", "datetimeIso": "2004-10-27T17:09:00", "content": "goodbye, Bob.\nthe sheep of Mars shall smile upon you always.", "replies": []}, {"id": 58, "name": "sherri (with an I)", "email": "", "location": "Monday, October 25, 2004 22:29 Write a comment", "datetime": "Monday, October 25, 2004 22:29", "datetimeIso": "2004-10-25T22:29:00", "content": "To all viewers of this site. The creator of this site has passed away. He will be dearly missed. If you knew him via the internet please post. If you know of any other sites which he has created or is known on please let us know.", "replies": []}, {"id": 57, "name": "celebrity celebs", "email": "celebs@example.com", "location": "", "datetime": "Wednesday, October 20, 2004 00:58", "datetimeIso": "2004-10-20T00:58:00", "content": "This are few of my sites. Check them out!\n\nNude Sheep nude sheep", "replies": []}, {"id": 56, "name": "wiliam", "email": "", "location": "", "datetime": "Monday, October 11, 2004 15:38", "datetimeIso": "2004-10-11T15:38:00", "content": "um, will your sheep be able to be counted in the stars?\n\n\n\n\nwill they substitute for the cow that jumped over the moon and jump over venus instead?\n\n\nwill you broadcast via satalite or shall i get a high power telescope?\n\nSINcerely,\n\n\nwilliam", "replies": []}, {"id": 55, "name": "Scott Niven", "email": "", "location": "Raleigh, NC", "datetime": "Sunday, October 10, 2004 11:18", "datetimeIso": "2004-10-10T11:18:00", "content": "I love your site! Maybe I'll start a 'Send Scott To the Moon,' site.\n\nTake care!\n\nScott Niven", "replies": []}, {"id": 54, "name": "Piercing Stories", "email": "gorald@yahoo.com", "location": "", "datetime": "Tuesday, October 5, 2004 12:41", "datetimeIso": "2004-10-05T12:41:00", "content": "Nice web site. Keep it this way! I wish you all success.\nwww.piercing-magic.com/clit-piercings/", "replies": [{"user": "Bob", "text": "I've always wanted to get that pierced, and now I can see there is a way. Thank the HEAVENS for the Internet!"}]}, {"id": 53, "name": "webmaster", "email": "webmaster@levillage.org", "location": "France", "datetime": "Sunday, October 3, 2004 15:44", "datetimeIso": "2004-10-03T15:44:00", "content": "I love this site! My friends and I spend tons of time on the quizzes and only today I found the Stick Man's death!!! I think this site is great! Nice work peoples!!", "replies": [{"user": "Bob", "text": "Thank you! I am particulary proud of \"whip cream guy and his strange midget fantasy game\", but to each their own."}]}, {"id": 52, "name": "betty", "email": "betty@yahoo.com", "location": "", "datetime": "Friday, October 1, 2004 11:20", "datetimeIso": "2004-10-01T11:20:00", "content": "Hi boys & girls!", "replies": [{"user": "Bob", "text": "I would respond, but I am FAR too busy."}]}, {"id": 51, "name": "astrologie", "email": "joss@levillage.org", "location": "France", "datetime": "Sunday, September 26, 2004 19:06", "datetimeIso": "2004-09-26T19:06:00", "content": "thank you for your site which brought to me much", "replies": []}, {"id": 50, "name": "astrologie", "email": "joss@levillage.org", "location": "France", "datetime": "Sunday, September 26, 2004 18:14", "datetimeIso": "2004-09-26T18:14:00", "content": "thank you for your site which brought to me much", "replies": [{"user": "Bob", "text": "I can now sleep at night, knowing I have brought much."}]}, {"id": 49, "name": "Daniel", "email": "forlinks@aol.com", "location": "", "datetime": "Sunday, September 26, 2004 09:47", "datetimeIso": "2004-09-26T09:47:00", "content": "I want to say that you have interesting info in this website. keep it going. thanks.\n\nAlso if you think my websites are a good resource for your coustomers, maybe you'll\nhave links to them in your links area. I would really appreciate that. They are about:\n\nbirthday flowers , flower pots, buy flowers online, roses\n\nsecond mortgage interest rates, fixed mortgage rates", "replies": [{"user": "Bob", "text": "My links are precious to me, sacred, even more than my own life! Which means, of cours, I will need at least $10,000 to link you. You know what I mean."}]}, {"id": 48, "name": "Gorald", "email": "gorald@yahoo.com", "location": "", "datetime": "Tuesday, September 21, 2004 06:11", "datetimeIso": "2004-09-21T06:11:00", "content": "Nice web site. Keep it this way! I wish you all success. www.piercing-magic.combodypiercings/", "replies": [{"user": "Bob", "text": "Perhaps YOU pierce sheep? Just one nasty sheep in particular? I'll pay double if you can make Tim shut up."}]}, {"id": 47, "name": "annuaire", "email": "titof@levillage.org", "location": "France", "datetime": "Monday, September 20, 2004 18:14", "datetimeIso": "2004-09-20T18:14:00", "content": "I have just visited your site and I to say little to you that it is quality", "replies": [{"user": "Bob", "text": "That is a coincidence, because I have little that is quality also!"}]}, {"id": 46, "name": "Diana", "email": "Diana@yahoo.com", "location": "", "datetime": "Thursday, September 16, 2004 13:05", "datetimeIso": "2004-09-16T13:05:00", "content": "Super Seite, besonders vom Design her gefÃ¤llt sie mir sehr. marketing.reestr.net", "replies": [{"user": "Bob", "text": "Danke!"}]}, {"id": 45, "name": "Video Sexe", "email": "Camelia511@hotmail.com", "location": "France", "datetime": "Wednesday, September 15, 2004 11:10", "datetimeIso": "2004-09-15T11:10:00", "content": "Thank of quality of your web", "replies": [{"user": "Bob", "text": "No, thank YOU."}]}, {"id": 44, "name": "friend", "email": "friend@yahoo.com", "location": "", "datetime": "Tuesday, September 14, 2004 12:51", "datetimeIso": "2004-09-14T12:51:00", "content": "Great site!. Very nice appearance indeed. Wish you all luck! www.video-faq.biz", "replies": [{"user": "Bob", "text": "I will need all luck!"}]}, {"id": 43, "name": "annuaire", "email": "reter@levillage.org", "location": "France", "datetime": "Monday, September 13, 2004 13:56", "datetimeIso": "2004-09-13T13:56:00", "content": "A very pleasant site which made me passed an owl moment. Thank you still and cheer.", "replies": [{"user": "Bob", "text": "I passed an owl moment. Extremely painful. But strangely exhilarating."}]}, {"id": 42, "name": "Mary", "email": "Mary@yahoo.com", "location": "", "datetime": "Monday, September 13, 2004 09:11", "datetimeIso": "2004-09-13T09:11:00", "content": "Charming site! Nice place to pay a visit, thanks. college.reestr.net", "replies": [{"user": "Bob", "text": "Paying a visit is nice, but paying me for a rocketship is better."}]}, {"id": 41, "name": "FyerSiash", "email": "FyerSiash@yahoo.com", "location": "", "datetime": "Friday, September 10, 2004 17:30", "datetimeIso": "2004-09-10T17:30:00", "content": "Very nice looking site! Keep going, folks. nose-piercing-rings.reestr.net", "replies": []}, {"id": 40, "name": "FyerSiash", "email": "FyerSiash@yahoo.com", "location": "", "datetime": "Friday, September 10, 2004 16:25", "datetimeIso": "2004-09-10T16:25:00", "content": "Very nice looking site! Keep going, folks. nose-piercing-rings.reestr.net", "replies": [{"user": "Bob", "text": "Do you pierce sheep?"}]}, {"id": 39, "name": "nothomeless", "email": "donations@nothomeless.com", "location": "AZ", "datetime": "Wednesday, September 8, 2004 19:41", "datetimeIso": "2004-09-08T19:41:00", "content": "good luck I love the sheep!!", "replies": [{"user": "Bob", "text": "Thanks, my friend. And the sheep love you (except for Tim)."}]}, {"id": 38, "name": "eryta", "email": "eryta@yahoo.com", "location": "", "datetime": "Tuesday, September 7, 2004 17:54", "datetimeIso": "2004-09-07T17:54:00", "content": "Very well done web site. It was a pleasure to visit it! I wish you all success. www.pharmacy-faq.info", "replies": [{"user": "Bob", "text": "I normally don't allow such blatant--oh the hell with it."}]}, {"id": 37, "name": "pedro", "email": "pedro@tiscali.be", "location": "portugal", "datetime": "Tuesday, August 31, 2004 14:58", "datetimeIso": "2004-08-31T14:58:00", "content": "mim e o meu amigo venont de cair sobre o vosso sítio que acaba-se de visitar e pode-se dizer-vos que está bem muito concu bravo", "replies": [{"user": "Bob", "text": "Obrigado meu amigo! Não se esqueça de emitir um dólar!"}]}, {"id": 36, "name": "HiHe", "email": "health@insurance.info", "location": "", "datetime": "Saturday, August 14, 2004 09:11", "datetimeIso": "2004-08-14T09:11:00", "content": "Nice web site! Keep it up. Have luck! www.health-insurance-faq.info", "replies": []}, {"id": 35, "name": "jina", "email": "", "location": "amishtown", "datetime": "Wednesday, August 11, 2004 10:12", "datetimeIso": "2004-08-11T10:12:00", "content": "i am a lover of the bastard sheep tim. i love the naughtiness of the word bastard.....oooohhaaahhhh...i think i need my own sheep to fully \"appreciate\" sheeplove.", "replies": []}, {"id": 34, "name": "Youssouf", "email": "", "location": "Netherlands", "datetime": "Sunday, August 8, 2004 05:53", "datetimeIso": "2004-08-08T05:53:00", "content": "Real cool that you are trying to go to Mars AND take 6 sheep with you. I hope you will succeed...\n\nWill there be any space for a tiny fluffy plush toy sheep like me to accompany you? I have traveled half the world, but Mars is still on my list.\n\nPity I can't comment on your blog", "replies": [{"user": "Youssouf", "text": "By the way Bob. I had to make an entry in my blog referring to your site.\nI mean. It is the least I can do to promote your site and help you (and especially your sheep!) get to Mars.\nGood luck.\n\nFeel free to leave a comment on my blog ;-)"}]}, {"id": 33, "name": "Mr. Lord, Esq.", "email": "spiny@flamesofphoenix.com", "location": "London", "datetime": "Sunday, August 8, 2004 00:26", "datetimeIso": "2004-08-08T00:26:00", "content": "You are a bloody intelligent man, Bob. Everyone should send you lots and lots of money. You are a genius. I love your goats, especially that Tim character. He seems like a real ass.\nI too, have a fondness for Mountain Dew and White Castle and goats and Mars.... mind if I come along? I'd send you tons and tons of money, but my pitifully negligible salary restricts me from doing so.\nWell, that's all for now. by the way, Bob, you are insane.", "replies": []}, {"id": 32, "name": "sheeplover", "email": "", "location": "yes some place with sheep", "datetime": "Friday, August 6, 2004 10:22", "datetimeIso": "2004-08-06T10:22:00", "content": "Bob, what a great concept! I love sheep too. one time a hitch hiker and i came across a beautiful lass with her head caught in the fence. I knew what to do a jumped at the chance to be with her. Then I told the hitch hiker \"your turn\" and he stuck his head in the fence. good luck on your quest and I'll provide funds as soon as I'm caught up paying that farmers judgement against me. I SUPPORT YOU!", "replies": []}, {"id": 31, "name": "Free Bonus", "email": "free@casinocat.biz", "location": "", "datetime": "Friday, July 30, 2004 20:55", "datetimeIso": "2004-07-30T20:55:00", "content": "Great site!. Get your prize! Free bonus pack $100! Play & Win!!! www.casinocat.biz", "replies": []}, {"id": 30, "name": "KeyKui", "email": "KeyKui@hotmail.com", "location": "", "datetime": "Friday, July 30, 2004 07:10", "datetimeIso": "2004-07-30T07:10:00", "content": "This site looks great. I like staying here. Will recommend to my friends.", "replies": []}, {"id": 29, "name": "kayte", "email": "beesting_girl@hotmail.com", "location": "baltimore", "datetime": "Thursday, July 22, 2004 20:42", "datetimeIso": "2004-07-22T20:42:00", "content": "I see you already have a young woman courting you, but I may have to interfere. You my dear are a dream", "replies": [{"user": "Bob", "text": "My sweet young lass, on Mars, we make our OWN rules, including those involving polygamy. I also glowingly accept YOUR marriage proposal.\n\nAnd my therapist said I would never be married. May he rot in hell."}]}, {"id": 28, "name": "commanderadam", "email": "", "location": "rectumville", "datetime": "Tuesday, July 6, 2004 12:48", "datetimeIso": "2004-07-06T12:48:00", "content": "Oh yea, I have a gas mask and some extra roofies if that will help the cause. Beleive me, the roofies will come in handy with getting you some Mars coochie, i know from experience.\n\nIt all started last september when my hairy Uncle Frank gave me some lemonade, but unknown to me, it was filled with a deadly dose of horse poison for some reason. For he next 17 days i traveled the universe, scoring with hot alien chicks and getting my groove on with pluton aliens. Anyways, if you need the gas mask or the roofies, give me a call on my cell. I forgot the number but you should remember it", "replies": [{"user": "Bob", "text": "I concur. (Except for the creepy part.)"}]}, {"id": 27, "name": "sonnerie", "email": "", "location": "", "datetime": "Sunday, June 27, 2004 13:53", "datetimeIso": "2004-06-27T13:53:00", "content": "Nice site. Good work.", "replies": [{"user": "Bob", "text": "I thank you, and my sheep thank you. Well, not Tim. Tim is an ass."}]}, {"id": 26, "name": "Rik Lewis", "email": "riklewis@earthlink.net", "location": "", "datetime": "Thursday, June 24, 2004 18:41", "datetimeIso": "2004-06-24T18:41:00", "content": "Bob, I am so impressed by this as I too, have had the same exact dream, albeit, even before I was born of the womb. I remember dreaming my destiny as well. I do remember, though, thinking that I should also have sheep shears as part of my supply list as the elements are harsh as you know on Mars. One should have the protection of wool at all times - It gets very cold at night, sometimes down into the teens. With sheers you have the ability to make your own clothing to ensure that you stay warm at all times.\n\nBecause you did not mention this I am sending you an additional $1 to be added to my other $1 donation. I trust you will realize your dream even faster than you thought possible with this sizable donation... Donation coming shortly as soon as I pool my resources.\n\nBest Regards,\nRik Lewis", "replies": [{"user": "Bob", "text": "Funds are tight, I will have to improvise. I will likely used sheared Mountain Dew cans and saw the wool off.\n\nMy intestines quiver with excitement at the thought of such a donation. That would double my funds! I am packing as we speak..."}]}, {"id": 25, "name": "sid", "email": "sid@oracle.com", "location": "", "datetime": "Thursday, June 24, 2004 17:00", "datetimeIso": "2004-06-24T17:00:00", "content": "", "replies": [{"user": "i love sheep", "text": ")"}, {"user": "Bob", "text": "And who, my friend, does not?!?"}, {"user": "VinyL", "text": "I Don't!!! I like big, naughty dogs!!! :D"}]}, {"id": 24, "name": "Dawn", "email": "licketyb00@yahoo.com", "location": "OrEgUn", "datetime": "Friday, June 18, 2004 19:45", "datetimeIso": "2004-06-18T19:45:00", "content": "Bob, as the once time owner of a few sheep, I can relate to your dream...I would have chosen someplace with grazing land myself,montana maybe, but it's your dream.You go boy! Oh, you might want to add some grass seed to your list. Sheep tend to like to like grass.I know they like to eat rocks, but it really isn't good for the few top teeth they have...or their intestines.", "replies": [{"user": "Bob", "text": "Hence my request for several large bags of sheep chow. You see, I have thought of everything. EVERYTHING!"}]}, {"id": 23, "name": "NegaDoug", "email": "negadoug@hotmail.com", "location": "Yo' Ass", "datetime": "Thursday, June 17, 2004 13:20", "datetimeIso": "2004-06-17T13:20:00", "content": "Why, why was I programmed to feel pain?!?!", "replies": [{"user": "Bob", "text": "At least you don't have Tim biting your ankles."}]}, {"id": 22, "name": "Lazer Slug", "email": "", "location": "", "datetime": "Wednesday, June 16, 2004 20:15", "datetimeIso": "2004-06-16T20:15:00", "content": "It's nice to see someone following their true dreams. Everyone has THOUGHT about raising sheep on Mars, but nobody has actually said they will do it!\n\nHave you notified the press? CNN loves stuff like this.", "replies": [{"user": "Bob", "text": "Excellent idea. I shall notify herewith."}]}, {"id": 21, "name": "Aqua Man", "email": "theycallmeboots2001@yahoo.com", "location": "", "datetime": "Tuesday, June 15, 2004 20:35", "datetimeIso": "2004-06-15T20:35:00", "content": "I love the amazing mindpower you have to come up with such a wondrous and enthusiastic plan to fulfill your lifelong and glorious dream, whether it be for queen and country, or if it's just so you and your sheep can be alone forever.\n\nBut I have one question there dear Bobby.... what are you going to do about water? I know scientists say there \"may\" be a water source on the planet, but will you travel the planet until you find it?\n\nSincerely,\nAqua Man", "replies": [{"user": "Bob", "text": "That's why I'm bringing the Dew. It makes the sheep a little jumpy, but they are much funner to watch."}]}, {"id": 20, "name": "Tiffany", "email": "eve756@aol.com", "location": "", "datetime": "Tuesday, June 15, 2004 19:32", "datetimeIso": "2004-06-15T19:32:00", "content": "Bob,\nI find myself oddly attracted to you. It must be your strange fascination with sheep. Are you single?\nLove,\nTiffany", "replies": [{"user": "Bob", "text": "I glowingly accept your marriage proposal. Start packing, for we have a rocketship to catch!"}]}, {"id": 19, "name": "Theo", "email": "", "location": "", "datetime": "Tuesday, June 15, 2004 18:51", "datetimeIso": "2004-06-15T18:51:00", "content": "Will you eat my cat?", "replies": [{"user": "Bob", "text": "3 words for you, Theo: Explosive diarrhea owie. Ever since my experience in Shanghai involving a Siamese cat and some peanut sauce, my bowels have been fragile and volatile, thus forcing me to consist only of Mountain Dew and White Castle."}]}, {"id": 18, "name": "Skippy", "email": "wshawnsmith@hotmail.com", "location": "Texas", "datetime": "Tuesday, June 15, 2004 14:56", "datetimeIso": "2004-06-15T14:56:00", "content": "Bob, I think your effort is great and would like to show my support by giving you an Abe Lincoln. Email me so we can arrange this.\n\nSkippy", "replies": [{"user": "Bob", "text": "It is much appreciated, my friend. Abe and I have always been good friends. Unfortunately, Slappy ate my password list, so I can't send email at this time. HOWEVER, paypal is always accepted and appreciated and loved and lusted for."}]}, {"id": 17, "name": "A Keen Eye for Math", "email": "", "location": "Texas", "datetime": "Tuesday, June 15, 2004 11:40", "datetimeIso": "2004-06-15T11:40:00", "content": "Bob,\nAlthough I initially found your plans to be so precisely conceived I could only assume you to be of supreme intelligence, I have noticed something on your website that gives me pause. On the \"Packing List\" page, on which you have obviously done many price comparisons in order to get the most parsimonious costs for your travel expenses, the total expected cost is $1,000,021,071.33. After the subtracted donation amounts, the cost inexplicably rises to $1,000,021,071,32. That, my friend, is a significant jump and not really a proper number as there should be three figures after the last comma. At first I thought it might be a simple notation error, but then immediately realized that 99% of the donations would then therefore be unaccounted for. Who is your accountant? I think he/she may be skimming off the top. Please investigate immediately as I fear your entire mission could be jeopardized. Obviously I will not be donating any money at this time until you can remedy your accounting situation.\n\nYour friend,", "replies": [{"user": "Bob", "text": "It was to my horror and utter disgust I realized the truth. I confronted my accountant, and although he started screaming something about sheep urine making the keyboard keys stick together, I had him dipped in Gravy Train and thrown into a cage with Tim the Sheep, who was starved and crazed after 3 days of eating naught but leeks and watching naught but Gigli. The problem has been solved, and Tim has been fed. Thank you for your keen observation..."}]}, {"id": 16, "name": "A different Bob", "email": "", "location": "", "datetime": "Tuesday, June 15, 2004 07:54", "datetimeIso": "2004-06-15T07:54:00", "content": "Mars Bob, you are an individual, I too have a dream. a dream of creating a race of atomic super amoebas that believe they are wooly mammoths and wander the plains of australia engulfing prey and blasting my enemies with radioactive death spores! I wish I had a dollar to send but alas, my research into amoebal technology goes long unheeded and unfunded. GOODLUCK! TAKE SOME AMOEBAS WITH YOU MY FRIEND!!\n\nlove Other Bob.", "replies": [{"user": "Bob", "text": "I will eat one White Castle before I go, thereby leaving room for some Amoeba's inside that little White Castle box. I hope amoebas like slider juice!"}]}, {"id": 15, "name": "Alias", "email": "", "location": "", "datetime": "Tuesday, June 15, 2004 06:04", "datetimeIso": "2004-06-15T06:04:00", "content": "If I had that much money I would spend it on the soul purpose of sending you, and the rest of the ill-minded to mars just so the normal / intelligent people can blow it out of orbit!", "replies": [{"user": "Bob", "text": "I concur."}]}, {"id": 14, "name": "John", "email": "ejohnjoyce@hotmail.com", "location": "earth -wish you were here.", "datetime": "Monday, June 14, 2004 17:49", "datetimeIso": "2004-06-14T17:49:00", "content": "Quite brilliant. Definitly more original than the guy who just wanted to be a millionaire and asked the world for a dollar. At least we get some inspiration for our buck. My dollar will be forthcoming.", "replies": [{"user": "Bob", "text": "My and my sheep appreciate the comment and the dollar and the inspiration."}]}, {"id": 13, "name": "Andy Bain", "email": "", "location": "The Moon", "datetime": "Saturday, June 12, 2004 04:02", "datetimeIso": "2004-06-12T04:02:00", "content": "Bob, I salute you, for you see I too had a dream.\n\nMine was to set up a 1 x 1.5 metre worm farm on Venus - quite a popular dream in the UK. It was all going so well, my sponsors had provided everything that I thought I needed. I had my travelling worm collony packed into a jacobs buscuit tin and all supplies etc organised. The launch day came and everyone was so proud. Then disaster struck. I had mistakenly calculated my trajectory using metric measurements instead of imperial. Or something. Imagine my horror and utter humiliation when I crash-landed into the Moon.\n\nSo you see instead of my glorious triumph, fulfilling my lifelong ambition, I have the shame of living on the Moon with only a 2' x 1.25' worm farm. I hope that you can learn from this and succeed in your dream where I so tragically and pittifully failed.\n\nGood luck Bob. You'll need it...", "replies": [{"user": "Bob", "text": "I thank you, Andy, for your support...Truly...I knew there were others like me out there.\n\nI would come and give you a hug, were it not for this restraining order against the Queen Mum...\n\nI feel for you and your worms. Once my rocket ship is built, I vow to swing by and drop off a couple of sliders to hold you over..."}]}, {"id": 12, "name": "sheeplover", "email": "", "location": "the barn", "datetime": "Friday, June 11, 2004 16:59", "datetimeIso": "2004-06-11T16:59:00", "content": "do you #@*%! sheep too?!!", "replies": [{"user": "Bob", "text": "NEVER! And when I say never, I mean very, very rarely. Hardly ever. Perhaps once or twice. daily. (I assume your @##$@ means 'appreciate'?)"}]}, {"id": 11, "name": "S'Mee", "email": "", "location": "Right here, where are you?", "datetime": "Friday, June 11, 2004 15:17", "datetimeIso": "2004-06-11T15:17:00", "content": "Go Bob!\nMight I suggest you go first and scout out appropriate locations for your ranch without the burden of your flock? In the past, other flockers have tried to settle in places that were in fact already spoken for (ever played cowboys and indians?) One would not want to piss off the new neighbors too soon.", "replies": [{"user": "Bob", "text": "VERY very good idea. However, given the fact that I can only go once, I will have to assume that it's mine for the taking. I don't see any flags there, do you? WELL DO YOU?!?"}]}, {"id": 10, "name": "Matt", "email": "", "location": "", "datetime": "Friday, June 11, 2004 14:49", "datetimeIso": "2004-06-11T14:49:00", "content": "Im liking the idea and totally believe you can achieve this goal takinhg into account the following\n1. sheep babies (or lambs as farm folk call them) need air\n2. you need apples too for like vitamin c n stuff\n3. you should use cheap fuel (make the sheep pedal a rocket bike maybe?)\nGenerally this idea is flawless (and by the way dont worry about martian flu cos unlike that other person i have read war of the worlds and its the common cold from earth that kills them not this martian flu) p.s please tell the martians to visit my site", "replies": [{"user": "Bob", "text": "I'm trying to think of a way to solve all 3 of your issues with one Pillsbury product...I know it's out there...\nZucht. En ik heb al zo'n last van frequent lozen v:\nHehe, ik dacht ook meteen aan dat beetje invloed op http://www.thispot.com/incorporation.html\nZucht. En ik heb al zo'n last van frequent lozen v:\nHehe, ik dacht ook meteen aan dat beetje invloed op http://www.thispot.com/incorporation.html"}]}, {"id": 9, "name": "Jon", "email": "", "location": "", "datetime": "Friday, June 11, 2004 14:30", "datetimeIso": "2004-06-11T14:30:00", "content": "Hmm you're in dreadfull need of a well trained engineer. I think I can fit the bill if I can come along!", "replies": [{"user": "Bob", "text": "Deal, but bring your own sliders.\n\nAnd sheep.\nHet begint op een vendetta te lijken, dat geeft ni:\nZucht. En ik heb al zo'n last van frequent lozen van flatus en RSI. http://www.egold-casino.h12.ru/Best-WMZ-Affiliate-Program-Directory.html\nHet begint op een vendetta te lijken, dat geeft ni:\nZucht. En ik heb al zo'n last van frequent lozen van flatus en RSI. http://www.egold-casino.h12.ru/Best-WMZ-Affiliate-Program-Directory.html"}]}, {"id": 8, "name": "brad", "email": "", "location": "maine", "datetime": "Friday, June 11, 2004 14:03", "datetimeIso": "2004-06-11T14:03:00", "content": "well done. not the sheep, the story", "replies": [{"user": "Bob", "text": "I appreciate that.\n\nThe comment, not the other thing."}]}, {"id": 7, "name": "Numa", "email": "", "location": "Earth", "datetime": "Friday, June 11, 2004 13:35", "datetimeIso": "2004-06-11T13:35:00", "content": "Bob the mars flu will get you and your sheep. Didn't you ever read \"War of the worlds\"?", "replies": [{"user": "Bob", "text": "I did, but I always got confused when the dog ate all the people, for no good reason."}]}, {"id": 6, "name": "Bert", "email": "", "location": "Wouldn't you like to know?", "datetime": "Friday, June 11, 2004 12:06", "datetimeIso": "2004-06-11T12:06:00", "content": "Mars... where the men are men and sheep are nervous! Good luck on getting there. I would however try and get some obtainable goals, like getting a sheep dog or something!", "replies": [{"user": "Bob", "text": "I had a sheepdog once, he made a fine stew! HAHaha, just kidding, it was more of a broth."}]}, {"id": 5, "name": "Leukon", "email": "", "location": "", "datetime": "Friday, June 11, 2004 10:38", "datetimeIso": "2004-06-11T10:38:00", "content": "hi bob,\nyou wanna breed sheeps, but you only got 6 oxygen masks, do lambs not breathe?\njust wondering.\n\nhappy landing! ¨\nleukon", "replies": [{"user": "ps", "text": "you have my support, at least my mental"}, {"user": "Bob", "text": "Good idea about the lamb thing, I'll have to scout that out.\n\nAlso, thanks A LOT for your support, I'm sure when I go to my feed store and say, \"HEY gimme five bags of sheep chow, and I'm paying for it with Leukon's support\" they'll be all, \"SWEET!\""}]}, {"id": 4, "name": "Commanderadam", "email": "", "location": "", "datetime": "Friday, June 11, 2004 09:52", "datetimeIso": "2004-06-11T09:52:00", "content": "Bob, i support you 43%. If i wasnt flat broke i would so give you a billion dollars, but i have car insurance, porno bills, my moms breast enlargement payments to pay, its just all to much. maybe if you sell your soul to satan.....", "replies": [{"user": "Bob", "text": "I will gladly submit your name name to the superior aliens in exchange for your mom's phone number."}]}, {"id": 3, "name": "Shadow", "email": "silvershadow@otakumail.com", "location": "Earth", "datetime": "Wednesday, June 9, 2004 16:42", "datetimeIso": "2004-06-09T16:42:00", "content": "This site is amusing...I am terribly amused...can I come too? I can toast your burger buns for you, and help tend the sheep...also, I know all the words to the chicken dance song.", "replies": [{"user": "Bob", "text": "The chicken dance song has words?"}]}, {"id": 2, "name": "Joey JO JO", "email": "", "location": "Um", "datetime": "Tuesday, June 8, 2004 19:47", "datetimeIso": "2004-06-08T19:47:00", "content": "This site frightens and confuses me, yet...I am strangely aroused...", "replies": [{"user": "Bob", "text": "You and me both."}]}, {"id": 1, "name": "Russell", "email": "brough@ohnoyoudont.com", "location": "Earth (mostly)", "datetime": "Tuesday, June 8, 2004 01:21", "datetimeIso": "2004-06-08T01:21:00", "content": "You make no mention of what type of sheep you're taking. Merinos, black sheep, what? And sex - 3 males and 3 females? Are you a Kiwi, Bob?", "replies": [{"user": "Bob", "text": "I have rectified that grievous neglect of information through the 'my sheep' link."}]}];
+
+function initials(name) {
+  const s = (name || "").trim();
+  if (!s) return "?";
+  const parts = s.split(/\s+/).slice(0,2);
+  return parts.map(p => p[0]?.toUpperCase() || "").join("");
+}
+
+function normalize(s) {
+  return (s || "").toString().toLowerCase();
+}
+
+function commentSearchBlob(c) {
+  const replies = (c.replies || []).map(r => `${r.user}: ${r.text}`).join("\n");
+  return [
+    c.id, c.name, c.location, c.email, c.datetime, c.content, replies
+  ].map(x => (x ?? "").toString()).join("\n");
+}
+
+function parseDate(c) {
+  if (c.datetimeIso) {
+    const t = Date.parse(c.datetimeIso);
+    if (!Number.isNaN(t)) return t;
+  }
+  const t2 = Date.parse(c.datetime);
+  return Number.isNaN(t2) ? 0 : t2;
+}
+
+function escapeHtml(s) {
+  return (s ?? "").toString()
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;");
+}
+
+function render(items) {
+  const feed = document.getElementById("feed");
+  if (!items.length) {
+    feed.innerHTML = `<div class="empty">No matches. Try a different search.</div>`;
+    return;
+  }
+  feed.innerHTML = items.map(c => {
+    const loc = c.location ? ` - <span class="loc">${escapeHtml(c.location)}</span>` : "";
+    const emailLine = c.email ? escapeHtml(c.email) : "";
+    const repliesHtml = (c.replies || []).length
+      ? `<div class="reply-wrap">` + (c.replies || []).map(r => `
+          <div class="reply">
+            <div class="rwho">${escapeHtml(r.user)}:</div>
+            <div class="rtext">${escapeHtml(r.text)}</div>
+          </div>
+        `).join("") + `</div>`
+      : "";
+    return `
+      <article class="card" data-id="${c.id}">
+        <div class="card-inner">
+          <div class="meta">
+            <div class="avatar" aria-hidden="true">${escapeHtml(String(c.id))}</div>
+            <div>
+              <div class="who">
+                <span class="name">${escapeHtml(c.name || "Anonymous")}</span>
+                ${loc}
+              </div>
+              <div class="email">${emailLine}</div>
+              <div class="time">${escapeHtml(c.datetime || "")}</div>
+              <hr class="sep"/>
+              <div class="content">${escapeHtml(c.content || "")}</div>
+              ${repliesHtml}
+            </div>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
+function apply() {
+  const q = normalize(document.getElementById("q").value);
+  const sort = document.getElementById("sort").value;
+
+  let items = COMMENTS.slice();
+
+  if (q) {
+    items = items.filter(c => normalize(commentSearchBlob(c)).includes(q));
+  }
+
+  items.sort((a,b) => {
+    if (sort === "new") return parseDate(b) - parseDate(a);
+    if (sort === "old") return parseDate(a) - parseDate(b);
+    if (sort === "idAsc") return (a.id||0) - (b.id||0);
+    if (sort === "idDesc") return (b.id||0) - (a.id||0);
+    return 0;
+  });
+
+  render(items);
+}
+
+document.getElementById("q").addEventListener("input", apply);
+document.getElementById("sort").addEventListener("change", apply);
+document.getElementById("clear").addEventListener("click", () => {
+  document.getElementById("q").value = "";
+  document.getElementById("sort").value = "new";
+  apply();
+  document.getElementById("q").focus();
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "/" && document.activeElement !== document.getElementById("q")) {
+    e.preventDefault();
+    document.getElementById("q").focus();
+  }
+});
+
+apply();
+</script>
+</body>
+</html>

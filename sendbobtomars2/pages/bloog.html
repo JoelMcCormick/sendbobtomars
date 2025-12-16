@@ -1,0 +1,662 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="windows-1252">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Send Bob To Mars!!! - Blog archive</title>
+  <style>
+    :root{
+      --orange:#d87400;
+      --pale:#f6e6a6;
+      --ink:#000;
+      --bg:#fff;
+      --link:#cc3300;
+      --vlink:#336633;
+      --divider:#d4a24a;
+    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:Arial, Helvetica, sans-serif;}
+    a:link{color:var(--link);}
+    a:visited{color:var(--vlink);}
+    .wrap{max-width:820px;margin:0 auto;}
+    header{background:var(--orange);color:#ffe7c7;padding:16px 18px 10px;}
+    header h1{margin:0;font-size:44px;font-weight:800;letter-spacing:.2px;}
+    .subhead{
+      background:var(--pale);
+      padding:8px 10px;
+      font-size:13px;
+      color:#8a3a00;
+      border-top:1px solid rgba(0,0,0,.12);
+      border-bottom:1px solid rgba(0,0,0,.12);
+    }
+    .layout{display:grid;grid-template-columns:190px 1fr;gap:0;align-items:start;}
+    .sidebar{padding:0 10px 14px 10px;}
+    .sideImg{
+      width:170px;height:165px;margin:0 auto 10px;
+      border:1px solid rgba(0,0,0,.35);overflow:hidden;background:#ddd;
+    }
+    .sideImg img{display:block;width:100%;height:100%;object-fit:cover;}
+    .about{text-align:center;color:#b05a00;font-weight:700;margin:4px 0 10px;text-decoration:underline;}
+    .profile{font-size:12px;color:#000;margin:0 auto;width:170px;text-align:left;}
+    .profile .row{display:flex;gap:6px;}
+    .profile .label{width:68px;text-align:right;color:#000;}
+    .profile .value{flex:1;}
+    .profile p{margin:10px 0 10px;text-align:center;}
+    .profile a{font-size:12px;color:#7b7b7b;text-decoration:none;}
+    .profile a:hover{text-decoration:underline;}
+    main{padding:0 14px 18px 14px;border-left:1px dotted var(--divider);min-height:420px;}
+    .post{padding:10px 0 16px;}
+    .post .date{text-align:center;color:#666;font-size:13px;font-weight:700;margin:12px 0 6px;}
+    .post h2{margin:0 0 6px;color:#b85e00;font-size:22px;font-weight:800;}
+    .post .body{font-size:13px;line-height:1.35;color:#000;max-width:520px;}
+    .post .meta{margin-top:10px;font-size:11px;color:#8a3a00;}
+    .post + .post{border-top:1px dotted rgba(0,0,0,.25);}
+    .archive{margin-top:18px;font-size:12px;color:#000;}
+    .archive h3{margin:0 0 6px;font-size:13px;color:#b85e00;text-transform:uppercase;letter-spacing:.4px;}
+    .archive ul{margin:0;padding-left:18px;}
+    .archive li{margin:4px 0;}
+    @media (max-width:760px){
+      header h1{font-size:36px;}
+      .layout{grid-template-columns:1fr;}
+      main{border-left:none;border-top:1px dotted var(--divider);}
+      .sidebar{display:grid;grid-template-columns:190px 1fr;gap:10px;align-items:start;}
+      .profile{width:auto;}
+    }
+    @media (max-width:520px){
+      .sidebar{grid-template-columns:1fr;}
+      .sideImg{width:100%;max-width:260px;}
+    }
+    .comments{
+  margin-top: 22px;
+  padding-top: 12px;
+  border-top: 1px dotted rgba(0,0,0,.35);
+  max-width: 520px;
+  font-size: 12px;
+}
+
+.comments h3{
+  margin: 0 0 10px;
+  font-size: 14px;
+  color: #b85e00;
+  font-weight: 700;
+}
+
+.comment{
+  margin-bottom: 14px;
+}
+
+.comment-meta{
+  font-size: 11px;
+  color: #666;
+  margin-bottom: 3px;
+}
+
+.comment-author{
+  font-weight: 700;
+  font-weight: bold;
+  color: #000;
+  margin-left: 3%;
+}
+
+.comment-body{
+  line-height: 1.35;
+  color: #000;
+  margin-left: 5%;
+}
+
+.comment-form{
+  margin-top: 18px;
+  padding-top: 10px;
+  border-top: 1px dotted rgba(0,0,0,.25);
+}
+
+.comment-form h4{
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #b85e00;
+}
+
+.comment-form input,
+.comment-form textarea{
+  width: 100%;
+  max-width: 420px;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  border: 1px solid #999;
+  padding: 4px;
+}
+
+.comment-form button{
+  font-size: 12px;
+  padding: 4px 10px;
+  background: #f6e6a6;
+  border: 1px solid #b85e00;
+  cursor: pointer;
+}
+.song{
+    font-style: italic;
+    color:rgb(153,51,153);
+}
+.navStrip{
+  width: 100%;
+  --link: black;
+  font-size: 130%
+
+}
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header role="banner">
+      <nav class="navStrip" aria-label="Top navigation">
+        <span><a href="../index.html">Home</a></span>
+        <span> | </span><a href="sendbob.html">Send Bob!</a>
+        <span> | </span><a href="mysheep.html">My Sheep</a>
+        <span> | </span><a href="packinglist.html">Packing List</a>
+        <span> | </span><a href="why.html">WHY?</a>
+        <span> | </span><a href="masterplanfinalfinal.html">My Plan</a>
+        <span> | </span><a href="packinglist.html">Page Title</a>
+        <span> | </span>Journal/Blog
+      </nav>
+      <br>
+      <h1>Send Bob To Mars!!!</h1>
+    </header>
+
+    <div class="subhead">
+      This is the place to read about Bob's harrowing yet inspiring journal of flying a rocketship to Mars to raise sheep...
+    </div>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Sidebar">
+        <div class="sideImg" aria-hidden="true">
+          <img src="../images/marsherd.jpg" alt="">
+        </div>
+
+        <div>
+          <div class="about">About Me</div>
+          <div class="profile" aria-label="Profile">
+            <h2>Bob</h2>
+            <ul>
+              <li>Age: 74</li>
+              <li>Astrological Sign: Leo</li>
+              <li>Year of the: Snake</li>
+              <li>Industry: Tourism</li>
+              <li>Occupation: Flyer to Mars</li>
+              <li>Location: South of Mars</li>
+            </ul>
+            <h3>About Me</h3>
+            <p>I am tentative yet scrumptious about my plans to go to Mars. </p>
+            <h3>You've just inherited a manufacturing plant that specializes in plastics. What are you going to make? </h3>
+            <p>Sheep Space Suits</p>
+            <h3> Interests</h3>
+            <p class="meta">Sheep, Mars, White Castle, Mountain Dew, more sheep</p>
+            <h3>Favorite Movies</h3>
+            Mars-Sheep-Reagan...The Conspiracy
+            <h3>Favorite Music</h3>
+            They Might Be Sheep,  Dave Sheep Band
+            <h3>Favorite Books</h3>
+            Lovely Sheep
+
+          </div>
+        </div>
+      </aside>
+
+     
+      <main aria-label="Blog archive">
+        <article class="post">
+          <div class="date">Wednesday, September 22, 2004</div>
+          <h2>Thank you time</h2>
+          <div class="body">
+            <p>It's that time of the month when I step away from my counseling sessions with Tim and give a THANKS to the people who are supporting me on my mission.</p>
+            <ul>
+              <li>Nick B! Thanks for the $.10, and yes, I will do what I can to find some interstellar 'escorts' to stop by your pad when I get acquainted with some.</li>
+              <li>Don W, your $.01 is much appreciated. </li>
+              <li>Ben L, Joe R, ditto.</li>
+              <li>Robert C, what can I say, the sudden $2.00 you sent my way was a surprise, and much appreciated. I nearly spent it on whiskey to placate Snooky and her hellish drinking binges, but I thought NO, no more giving in. This time I have to stand firm if I'm ever going to leave.</li>
+            </ul>
+            <p>Thanks all. I will now sing a song in thanks:
+            </p>
+            <p class="song">I believe the sheep are our are future <br>
+              Teach them well and let them lead the way <br>
+              Show them all the beauty they possess inside<br>
+              Give them a sense of pride to make it easier<br>
+              Let the sheep's laughter remind us how we used to be<br>
+              Everybody searching for a hero<br>
+              People need someone to look up to<br>
+              I never found anyone to fulfill my needs<br>
+              A lonely place to be (like Mars)<br>
+              So I learned to depend on me.</p>
+
+              <p>Peace out.</p>
+          </div>
+          <div class="meta"># posted by Bob @ 6:51 PM 3 comments</div>
+          <section class="comments" aria-label="Comments">
+            <h3>Comments</h3>
+          
+            <div class="comment">
+              <div class="comment-meta">
+                <span class="comment-author">Youssouf:</span>
+                <span class="comment-date">12:31 AM</span>
+              </div>
+              <div class="comment-body">
+                Songs about sheep are always great.<br>
+                So.<br>
+                Great song Bob!
+              </div>
+            </div>
+          
+            <div class="comment">
+              <div class="comment-meta">
+                <span class="comment-author">Anonymous:</span>
+                <span class="comment-date">1:22 AM</span>
+              </div>
+              <div class="comment-body">
+                I think this is a great thing you are doing Bob, I think.<br>
+                <br>
+                I will send you money the next time I borrow my big brothers credit card when he's in the shower, ok!<br><br>
+
+                Oh yeah, I will link my blog to you, and I will tell my friends bout you, because somebody has to land on Mars, and I hope it's you! It would be so cool if you can add me to a blogroll if your blog had one like blogrolling, because this way when I add your blog to my blogs blogrolling blogroll I can see when you update your blog on my blog so I can come visit your blog to see what you blogged! This will make you more popular, because your so cool! <br><br>
+
+                My dream is to work at White Castle with my big brother! <br><br>
+
+                Have a nice weekend, Bob, and tell your sheep I say Hi! <br><br>
+
+                Rockchild <br><br>
+
+                http://www.rockchild.com<br>
+
+                P.S's. Maybe you should use Haloscan for your comments, because like blogrolling.com, it's free, and better than this!
+              </div>
+            </div>
+            <div class="comment">
+              <div class="comment-meta">
+                <span class="comment-author">Anonymous:</span>
+                <span class="comment-date">1:33 AM</span>
+              </div>
+              <div class="comment-body">
+                I just added your blog to my blogs blogrolling.com blogroll, but it will take a little wile for your blog to show on my blogs blogroll, but you will see your blog on it soon, I hope!<br><br>
+
+                Have a nice weekend! But please be nice to Tim, because it's not his fault he's a mistake!<br><br>
+
+                Rockchild<br><br>
+
+                http://www.rockchild.com
+              </div>
+            </div>
+        </article>
+
+        <article class="post">
+          <div class="date">Wednesday, September 22, 2004</div>
+          <h2>Sheep fondue</h2>
+          <div class="body">
+            <p>Ah, my new friend Julie has a <a href="https://web.archive.org/web/20041207000749/http://blogs.salon.com/0001399/2002/08/25.html">wondrous cookbook</a> completely devoted to cooking Tim! Well, not exactly, but it might be a good read on the trip. Also, I need all the creative ways possible to cook sheep chow. Tim can be a real bastard when it comes to dinner.</p>
+           
+          </div>
+          <div class="meta"># posted by Bob @ 1:02 PM 2 comments</div>
+          <section class="comments" aria-label="Comments">
+            <h3>Comments</h3>
+            <div class="comment">
+              <div class="comment-meta">
+                <span class="comment-author">Youssouf:</span>
+                <span class="comment-date">1:26 AM</span>
+              </div>
+              <div class="comment-body">
+                Bob, I want to help you cooking Tim. So, I started typing a recipe for you.<br>
+                But the comment went on and on. Was just way to big for a comment. That's why I made a post on my sheeplog with the recipe and all the links to your Tim story and aching for recipes.<br>
+                <a href="http://sheepworld.blogspot.com/2004/09/cooking-tim-stew.html">http://sheepworld.blogspot.com/2004/09/cooking-tim-stew.html</a> <br><br>
+
+                Bob, enjoy the cooking!
+              </div>
+            <div class="comment">
+              <div class="comment-meta">
+                <span class="comment-author">JoeTheTimeTraveler:</span>
+                <span class="comment-date"> #ERR: Invalid Timestamp </span>
+              </div>
+              <div class="comment-body">
+                Bob's link broke sometime in the past 20 years, but I'm pretty sure he was referring to the blog the link now points to. <br>
+                Wasn't sure which post, so I just linked to the archive of the home page. <br>
+                He might have been talking about the book Julie was writing at the time:<br>
+                <a href="https://www.goodreads.com/book/show/13747.Julie_and_Julia">Julie & Julia: 365 Days, 524 Recipes, 1 Tiny Apartment Kitchen</a><br>
+                <br>But I'm pretty sure he was talking about the cookbook the blog is based on because it's funnier if he's implying that <a href="https://en.wikipedia.org/wiki/Mastering_the_Art_of_French_Cooking">the cookbook that launched Julia Child's career</a> was all about cooking Tim the sheep.  
+              </div>
+            </div>
+           
+        </article>
+
+
+        <article class="post">
+          <div class="date">Wednesday, September 22, 2004</div>
+          <h2>Time to get this partay started...</h2>
+          <div class="body">
+            <p>
+              the Good news is: I've decided to ramp up my efforts in getting this damnable rocketship finally built so I can get going. Between Al Qaeda and the "Joey" spinoff and the next Star Wars movie ever looming, I need to get going quick-like. <br><br>
+
+              the Bad news is: I still only have $2.02 collected so far, which is not exactly on schedule. According to my original timeline, I should have a quarter of the funding so far, and I'm not real good at math but I think it's well over $140. <br><br>
+
+              Ah well.
+
+            </p>
+           
+          </div>
+          <div class="meta"># posted by Bob @ 11:59AM 0 comments</div>
+          
+           
+        </article>
+        <article class="post">
+          <div class="date">Tuesday, August 10, 2004</div>
+          <h2>Youssouf the Plush Sheep</h2>
+          <div class="body">
+            <p>
+              That yummy Youssouf was kind enough to mention me here so I must do the same. I feel I must bring Youssouf with me; he is light, doesn't eat much, and is surely more pleasant than Tim. Don't worry, Tim. I'll keep you around for awhile. I have...plans...for you.
+            </p>
+           
+          </div>
+          <div class="meta"># posted by Bob @ 3:08 PM 0 comments</div>
+                     
+        </article>
+        <article class="post">
+          <div class="date">Tuesday, August 10, 2004</div>
+          <h2>My Haiku</h2>
+          <div class="body">
+            <p>
+              What better way to display my love of sheep, mars and slyders than with ahaiku?
+              <br><br>
+              </p>
+              <p class="song" style="font-size:130%">To dream, to find Mars,<br>
+              What more could a sheep boy want?<br>
+              Kill Tim! And Slyders!<br>
+
+            </p>
+           
+          </div>
+          <div class="meta"># posted by Bob @ 3:08 PM 0 comments</div>
+                     
+        </article>
+        <article class="post">
+          <div class="date">Tuesday, July 20, 2004</div>
+          <h2>ADD</h2>
+          <div class="body">
+            <p>
+              I was just reading a really good article on ADD and
+            </p>
+           
+          </div>
+          <div class="meta"># posted by Bob @ 12:17 PM 0 comments</div>
+                     
+        </article>
+        <article class="post">
+          <div class="date">Monday, July 19, 2004</div>
+          <h2>The Era of Ebay</h2>
+          <div class="body">
+            <p>I've just had a brilliant idea.  BRILLIANT!</p>
+            <p>I'll offer my wares, so to speak, <a href="#ebaycomment">on Ebay.</a></p>
+            <p>I may have to open a second bank account to hold all of the money.</p>
+            <p>At least I'm not <a href="#ebaycomment">selling rubbish.</a></p>
+           
+           
+          </div>
+          <div class="meta"># posted by Bob @ 10:30 PM 0 comments</div>
+          <section class="comments" aria-label="Comments">
+            <h3 id="ebaycomment">Comments</h3>
+         
+            <div class="comment">
+              <div class="comment-meta">
+                <span class="comment-author">JoeTheTimeTraveler:</span>
+                <span class="comment-date"> #ERR: Invalid Timestamp </span>
+              </div>
+              <div class="comment-body">
+                <p>I picked through every bit of lint I could dig out of the deep recesses of internet's belly button trying to figure out what the original ebay links were.</p>
+                <p>No luck. So you'll have to use your imagination to fill in the blanks. </p>
+                <p>This was right at the height of the golden age of newsworthy internet auctions.<br>Some of the highlights of eBay circa 2004:</p>
+                <ul>
+                  <li><a href="https://www.nbcnews.com/id/wbna6511148">The virgin mary on a grilled cheese sandwhich - $28,000</a></li>
+                  <li><a href="http://news.bbc.co.uk/2/hi/uk_news/england/coventry_warwickshire/4137877.stm">A single cornflake</a></li>
+                  <li><a href="https://billrrrrr.blogspot.com/2016/09/the-50000-ghost-in-jar.html">Ghost in a Jar - $55,000</a></li>
+                  <li><a href="https://www.nbcnews.com/id/wbna6867209">Forehead Tattoo Ad Space - $38,000</a></li>
+                  <li><a href="https://www.cbsnews.com/news/britneys-spent-gum-for-sale/">Britney Spear's Used Chewing Gum - $14,000</a></li>
+                  <li><a href="https://www.snopes.com/fact-check/frock-of-the-town/">Ex-wife's Wedding Dress</a></li>
+                </ul>
+                <p class="meta">eBay item #'s for future research endeavors - Bob's wares: 5508210650  Rubbish: 5500693513</p>
+
+
+              </div>
+            </div>
+            </section>
+           
+        </article>
+
+          
+                     
+        </article>
+        <article class="post">
+          <div class="date">Sunday, July 18, 2004</div>
+          <h2>Mission to Mars, the VIDEO!!!</h2>
+          <div class="body">
+            <p>Spanky threw-up on my blog, so instead of re-writing my ideas for a manure-powered rocketship, I’ll review a movie I saw in a local cheap theater that plays older flicks. </p>
+            <p>There comes a time in one’s life in which one goes through a movie-going experience so incredible, so utterly fantastic, so completely earth-shattering that s/he is changed forever.  I’m still waiting for that moment, but in the meantime, here is my experience whilst sneaking into, “Mission to Mars.” </p>
+            <p>The highpoint of the movie occurred when I was lounging about near the concession counter waiting to pounce on an unsuspecting bag of someone else’s popcorn so that I might ‘sample’ a bit.  I do have standards, after all, and there ain’t no way I’m paying four bucks for some damnably stale popcorn slathered with some motor oil or whatever the hell that stuff is. </p>
+            <p>I was growing short of patience when I noticed…her.  An attractive lass across the lobby.  I gathered up my courage, sucked in my gut, walked up to her and introduced myself.  “Greetings!” I shouted in a loud and confident voice.  “I hate to name drop, but I’m Bob.  You know…like in Mars and sheep and whatnot?” </p>
+            <p>Before she had a chance to praise me, I found myself inexplicably drawn to heave my heart onto my sleeve. </p>
+            <p>“Oh, sure, I may not look like much,” I said, tears welling in my bloodshot eyes, “A few scars from an unfortunate accident with an off-brand industrial chemical set my parents bought for me when I was two years old.  A bit of a large gut, uncontrollable sweating, perhaps a few ‘alleged’ incidents involving running naked through McDonald’s, eating food randomly from other people’s trays while distracting them by singing the theme from, “The Love Boat” at the top of my lungs, and other disease-related things.  I suppose things like this make me unappealing to some.” </p>
+            <p>“What?  You were expecting maybe Leonardo DiCaprio?” </p>
+            <p>I jumped up and down and began to dance around her, screaming, “Oh, oh oh!  Look at me!  I’m Leonardo!  I’m the hero in some stupid-ass boat movie!  OOOH OOOH!  Look!  I’m Leonardo and I weight 80 pounds soaking wet, yet I play the lead man and I save some chubby girl even though I can’t wipe my own ass without special help!” </p>
+            <p>I carried on emotionally as tears gushed down my face in a river of righteous indignation.  “I’ve had my share of hurt!  I may have my problems, but I’m a human being!  I’ve got dreams and hopes and aspirations like anyone!  Do you not realize it was President Gerald Ford himself who once said, ‘Even we chubby bastards need love as well and hamburgers now and then?’  DON’T YOU?!? </p>
+            <p>There I was, on my knees, screaming and weeping, when suddenly the girl’s parents came by, gave me a nasty look, grabbed her and took her into “Toy Story 2.” </p>
+            <p>I gathered myself up, grabbed a bag of popcorn that someone had foolishly left on the counter while tying their shoes, and went in to see, “Mission to Mars.” </p>
+            <p>It was okay, I guess.  Some morons go up in a rocket, drink a lot of Tang, use those little toilets with that crazy blue water in it, and they go to Mars.  I think everybody dies, but I don’t remember.</p>
+          
+          </div>
+          <div class="meta"># posted by Bob @ 7:06 PM 0 comments</div>
+                    
+        </article>
+      </article>
+      <article class="post">
+        <div class="date">Sunday, July 11, 2004</div>
+        <h2>Forced to watch Magnolias...</h2>
+        <div class="body">
+          <p>
+            I stole another movie from the loser video rental place in town. Snooky is on another bourbon bender, thus I’ve found ’tis better to leave her until she sleeps it off. More of Snooky’s embarrassing antics can be found at
+            <a href="http://www.sendbobtomars.com">http://www.sendbobtomars.com</a>.
+            Anyway, I got that movie “Magnolias.”
+          </p>
+        
+          <p>
+            The hype alone made me want to see “Magnolias”. I, as part of the elite movie-viewing public, have finally accepted the fact that if a movie is promoted enough on TV, radio, newspapers, web, graffiti, blogs and shaved in sheep (my personal favorite), we have no choice but to fork over our hard-earned allowance money and see the film. Magnolias is such a movie. Oh, I’ve seen the hype…and all I can say is: FRAUDULENT!
+          </p>
+        
+          <p>
+            The trailer features such prominent actors as Tom Cruise and some guy in a hospital, and…er, that guy with the big nose. But when I finally inserted the movie into my Betamax, it was nothing but chicks! Julia Roberts, Dolly Parton, Darryl Hannah, Shirley MacClaine, and that chick with the huge nose. Oh…and that tiny, whiny brunette from “Smokey and the Bandit.”
+          </p>
+        
+          <p>
+            I forced myself to watch it, and the sheer boredom made me want to gouge out my eyes with sheep hoofs. The plot consists of a bunch of women sitting around some hair salon talking about picnics and rotten husbands until finally Julia Roberts gets so frustrated with it all that she has a seizure and dies, and then everybody laughs and has a picnic and an Easter bunny drives up on a motorcycle and drives somebody somewhere.
+          </p>
+        
+          <p>
+            But…you know, “chick flicks” aren’t all bad, if you sit and think about it, which I do frequently. Julia Roberts, for instance. Oh, sure she may have a mouth like a horse and a laugh like a hyena on crack, but she’s rich and female, which pretty much satisfies all three of my requirements for eternal love and happiness.
+          </p>
+        
+          <p>
+            Then I got to thinking…I’ve never had much luck with girls. No, they don’t seem to have much time for a simple, sensitive, intelligent, sheep-loving guy with a bit of a gut, a few oozing, open sores, a penchant for booze and scratching and perhaps collecting the occasional roadkill carcass for his kick-ass “Dead Zoo” in his parent’s basement where he still lives.
+          </p>
+        
+          <p>
+            But Julia, I think, would be different. We would traipse about the daisies, singing little happy-like songs and running naked into each other’s arms. I can already hear her singing, “Beer Barrel Polka” whilst I am tickled under the chin by a brutish German midget. Sure, some might call that some silly pipe-dream, but we have to reach for the stars, damn it! As President Eisenhower once said, “If you don’t reach for the stars, don’t drag your welfare-soaking ass to Illinois or I’ll put the smackdown on yo ass.”
+          </p>
+        
+          <p>
+            Oh, and another thing, these idiot producers need to finalize a name. “OOOOooh, oh, I like ‘Magnolia!’” “No, no, no, I like Steel Magnolias!” How is a young Jewish sheep friend who has a thing for Gary Coleman supposed to keep his Magnolia movies straight? At least I didn’t pay for it. Anyway, 2 out of a lot of stars for “Magnolia.”
+          </p>
+         
+        </div>
+        <div class="meta"># posted by Bob @ 7:10 PM 0 comments</div>
+                   
+      </article>
+    </article>
+    <article class="post">
+      <div class="date">Tuesday, July 06, 2004</div>
+      <h2>Sheep Dip</h2>
+      <div class="body">
+        <p>
+          The sheep are starting to get uppity; mostly <a href="mysheep.html">Spanky.</a></p>
+
+            <p>I remember the days when we use to frolic and play and dance and be whismical and throw up and run about singing showtunes and giggling like school girls.
+
+            <p>Lately, Spanky has taken to the whiskey, and has been quite abusive. Spanky doubts our mission, and it makes me sad to think that such a soul, once pure and innocent, has taken to sourness and nastiness and jokes about my freakish body odor.
+
+            <p>It is times like this that I begin to lose hope, and long for the simply days of selling used fruit with nary a care in the world.
+
+        </p>
+       
+      </div>
+      <div class="meta"># posted by Bob @ 3:31 PM 0 comments</div>
+                 
+    </article>
+    <article class="post">
+      <div class="date">Monday, July 05, 2004</div>
+      <h2>Movie Review: X-Men Files</h2>
+      <div class="body">
+        <p>Whilst pondering my Mars plans, I decided to take a break and 'borrow' a dvd from a local video store. X-Men Files something something.</p>
+
+        <p>Oh, so now Dana Sculley "Dana Scully the Skullmeister" Skully is up to the big time! Some idiots gave her and that Fox guy some cash to star in a feature movie, and now they're too good for the common man. Well, I happen to know a secret...Dana Sculley is not that chick's real name. It is, in fact, Gillian Anderson.</p>
+
+        <p>How do I know? Well, I'm glad you asked.</p>
+
+        <p>It was a long time ago, whilst I was a naive, young fruit boy in the streets of San Diego. Oh, I would be up at dawn, distributing pre-chewed fruit to those who so desired. It was a thankless job, but at least there was no recognition. One day, I dropped a mushed banana at the feet of, yes, that red-headed siren, Gillian.</p>
+
+        <p>"What the hell?!?" she said, with just a touch of indignation. I simply smiled and stared longingly, and said, "You will be mine, sweet vixen."</p>
+
+        <p>She laughed that patronizing laugh I'll forever remember, and she walked away. Even now, the smell of bruised banana wafts through my brain as I hear that red-head's hyena cackle.</p>
+
+        <p>Well, she soon learned my seriousness as I made my camp, and thus made my eternal stand. For three weeks, I slept on the steps of her apartment, crooning, "Do you really want to hurt me" by that boy-genius Boy George, and lighting pyres on her front lawn with such messages as, "Join me and my sheep!", and "Spanky Rulez.”</p>
+
+        <p>Well, despite the 5 policeman it took to vacate me from the premises, my love burned on. It was only through several ill-fated break-ins, 4 bullets to the thorax, a restraining order and 2 years of prison time that I finally realized she wasn't for me.</p>
+
+        <p>Now I'm my own man, and I have some semblance of dignity. Luckily, I've learned to reach for more probable goals. Like that Natalie Portman. Now THERE is a honey of a yummy of a woman if I've ever seen one.</p>
+
+        <p>I recently learned that she has a summer cabin in Northern Minnesota. Having found the address through means of a highly-illegal nature, I located the cabin. I drove by it several times, but not seeing a light, I nearly drove away. Not driving away, I let myself in a basement window, and romantically placed several hundred post-its strewn across the house proclaiming my love, and promising my fidelity, not to mention the death and dismemberment to any who stand in our way. Yes, I will be Mr. Queen Amidala.</p>
+
+        <p>Oh, and X-men files get 2 stars.</p>
+      </p>       
+      </div>
+      <div class="meta"># posted by Bob @ 6:56 PM 0 comments</div>
+                 
+    </article>
+    <article class="post">
+      <div class="date">Thursday, July 01, 2004</div>
+      <h2>My interview with 60 Minutes</h2>
+      <div class="body">
+        <p>I was grateful yet nervous to receive a phone call from the producers of 60 Minutes. My first though was, “This is a wondrous chance to get exposure for my harrowing yet inspiring cause!” My second thought was, “What is Spanky doing in my backyard with 2 midgets and 40 gallons of Rocky Road ice cream?”<p></p>
+        <p>I agreed to go to the interview, but I am starting to think it was a mistake. ‘Twas none other than Andy Rooney who interviewed me, may he rot in hell.</p>
+
+        <p>Below is a transcript.</p>
+
+        <p>* * *</p>
+
+        <p>(Rooney) Hello! Welcome to 60 minutes! With us is Bob, from sendbobtomars.com. Tell me a bit about yourself, Bob!</p>
+
+        <p>(Me) Thank you, Mr. Rooney, a pleasure to be here. A pleasure! Well, you see, it first started in St. Ignatius’ Deathful Home for-</p>
+
+        <p>(Loud sounds of flatulence in the background)</p>
+
+        <p>(Rooney) WHOA! You feeling okay there, Bob?</p>
+
+        <p>(Me) Sir! It was not I…surely you play a trick on me.</p>
+
+        <p>(Rooney) Suuure, whatever you say, farty. Now, tell me about your plans to go to Mars.</p>
+
+        <p>(Me) Indeed! Well, I think by using a mixture of nitrous oxide and a special type of rubber, I can burn-</p>
+
+        <p>(More flatulence sounds)</p>
+
+        <p>(Rooney) WHOOOAAA! I think I see the fuel you're burning! It’s called bean burrito!</p>
+
+        <p>(Canned laughter in the background)</p>
+
+        <p>(Me) Sir, I’m insulted yet frustrated. All I want is-</p>
+
+        <p>(More flatulence sounds)</p>
+
+        <p>(Rooney) WHOAAA! I see what you want! A cork!</p>
+
+        <p>(Canned laughter in the background)</p>
+
+        <p>(Me storming off stage, crying like a school girl.)</p>
+
+        <p>* * *</p>
+
+        <p>I think this episode airs sometime in August.</p>
+
+        <p>You’ll rue the day, Rooney. RUUUUUUUEEEEEEEEEEeeeeeeeeeeeee!</p>
+        
+      </div>
+      <div class="meta"># posted by Bob @ 7:31 AM 0 comments</div>
+                 
+    </article>
+    <article class="post">
+      <div class="date">Wednesday, June 30, 2004</div>
+      <h2> Must have slyders</h2>
+      <div class="body">
+        <p>I have contacted both White Castle and Mountain Dew with my simple yet undemanding requests. I have offered the wondrous benefit of having their logo on my rocket ship in return for a tiny, simple lifetime supply of nummies. We shall see how that goes.</p>
+
+        <p>Also, Spanky is starting to tick me off. I’m getting a look, the look that says, “You useless turd, not only will you never go to Mars, but nobody likes you and you stank.”</p>
+
+        <p>CAREFUL SPANKY, YOU ARE RISING TO THE TOP OF MY LIST...</p>
+
+      
+      <div class="meta"># posted by Bob @ 12:25 AM 0 comments</div>
+                 
+    </article>
+    <article class="post">
+      <div class="date">Friday, June 25, 2004</div>
+      <h2>A horrible betrayal</h2>
+      <div class="body">
+
+        <p>Thanks to the keen eyes of one of my faithful supporters, a horrible and uncouth betrayal was discovered. It was to my horror and utter disgust that I realized my accountant had been skimming off the top and cooking the books, in hopes of keeping the vast majority of donated funds for his own greedy, selfish purposes. Who knows how many millions he has siphoned, sabotaging my journey? OH THE HUMANITY, I have only $2.03 now, and Pooky just threw up on my crayons, so that pretty much takes care of what little funds I have. Had.</p>
+    
+        <p>I confronted my accountant, and although he started screaming something about sheep urine making the keyboard keys stick together, I had him dipped in Gravy Train and thrown into a cage with Tim the Sheep, who was starved and crazed after 3 days of eating naught but leeks and watching naught but Gigli. It was a long and painful death, but fitting for one who would rob a young boy of his childhood dream of raising sheep on Mars.</p>
+    
+        <p>Tim is fed, I am taking care of my own accounts, and it is ONWARD WE MARCH, my friends. For nothing is going to keep me down. Oh no. I got to keep on moving.</p>
+      
+      <div class="meta"># posted by Bob @ 7:31 AM 0 comments</div>
+                 
+    </article>
+    <article class="post">
+      <div class="date">Friday, June 18, 2004</div>
+      <h2>And so it starts!</h2>
+      <div class="body">
+        <p>Finally, after many torturous months, the website is up. I ask myself, is it worth it? After all, who out there would help a simple boy with a simple dream. But as I look at the guestbook and see all the support, I am glad I stuck with it.</p>
+
+        <p>I went out to check on the sheep today, and Slappy looked at me questioningly. I said, “Don’t worry, Slappy, we’ll go soon.” But I have to admit I have my doubts. Building a rocket ship is tougher than I expected. I am working on the plans now, but Pooky keeps urinating on them.</p>
+
+
+      
+      <div class="meta"># posted by Bob @ 12:16 AM 0 comments</div>
+      <section class="comments" aria-label="Comments">
+        <h3 id="ebaycomment">Comments</h3>
+     
+        <div class="comment">
+          <div class="comment-meta">
+            <span class="comment-author">JoeTheTimeTraveler:</span>
+            <span class="comment-date"> #ERR: Invalid Timestamp </span>
+          </div>
+          <div class="comment-body">
+            <p>Torturous months is probably not hyperbole...he made this entire site in HTML 3...<br>
+            Back when you had to count how many pixels you wanted your images to be from the side of the screen...
+
+
+          </div>
+        </div>
+        </section>
+                 
+    </article>
+    
+
+
+      
+        </section>
+      </main>
+    </div>
+  </div>
+</body>
+</html>

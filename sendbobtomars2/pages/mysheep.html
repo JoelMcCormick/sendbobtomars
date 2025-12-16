@@ -1,0 +1,515 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="windows-1252">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="This site is dedicated to one man's inspiring yet harrowing childhood dream of flying to Mars and raising sheep!  Weep with joy and scream with delight as you read of his exploits!">
+  <meta name="keywords" content="sheep, mars, spacecraft, UFO, abduction, NASA, cool, new, fun, Spears, send, bob, to, space travel, funny, new, different, goofy, odd, money, playboy, nude, pic, picture, blog, weblog, xml, music lyrics, maps, games, jokes, weather, free, iraq">
+  <title>Send Bob to Mars, Please, oh please...</title>
+
+ 
+  <style>
+    :root{
+      --bg: #000;
+      --ink: #000;
+      --paper: #fff;
+      --accent: #800000; /* maroon */
+      --link: #cc3300;
+      --vlink: #336633;
+      --border: #c99;
+      --soft: #dcb8b8;
+      --shadow: rgba(0,0,0,.18);
+      --ui: "Trebuchet MS", Tahoma, Verdana, Arial, sans-serif;
+      --serif: "Times New Roman", Times, serif;
+      --pixel: ui-monospace, "Courier New", Courier, monospace;
+    }
+
+    html, body{
+      margin:0;
+      padding:0;
+      background: var(--bg);
+      color: var(--paper);
+      font-family: var(--serif);
+    }
+
+    a:link{ color: var(--link); }
+    a:visited{ color: var(--vlink); }
+    a:hover{ text-decoration: underline; }
+
+    /* A little �late 90s / early 00s� framing, but responsive */
+    .page{
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 10px 12px 28px;
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .badge{
+      width: 144px;
+      flex: 0 0 auto;
+      text-align:center;
+      background: var(--paper);
+      color: var(--ink);
+      border: 1px solid var(--border);
+      box-shadow: 2px 2px 0 var(--shadow);
+    }
+    .sheep-table{
+  width: 100%;
+  max-width: 543px; /* matches old table width */
+  border-collapse: separate;
+  border-spacing: 0 22px; /* creates the big vertical gaps between entries */
+  font-family: Arial, sans-serif;
+  background: #fff;
+  color: #000;
+}
+
+.sheep-table th{
+  font-weight: 700;
+  font-size: 13px;
+  text-align: center;
+  padding: 0 10px 6px 10px;
+  white-space: nowrap;
+}
+
+.sheep-table td{
+  padding: 0 10px;
+  font-size: 12px;
+  line-height: 1.25;
+  vertical-align: top;
+}
+
+.sheep-table td.name{
+  width: 68px; /* matches original first column */
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.sheep-table td.comment{
+  width: 237px;
+}
+
+.sheep-table th.pic-col,
+.sheep-table td.pic{
+  width: 237px;
+  text-align: center;
+}
+
+.sheep-table td.pic img{
+  display: block;
+  margin: 2px auto 6px;
+  max-width: 180px;
+  height: auto;
+}
+
+.sheep-table td.pic .breed{
+  display: block;
+  font-style: italic;
+  font-size: 12px;
+}
+
+
+
+    .badge a{
+      color: var(--ink);
+      text-decoration:none;
+      display:block;
+      padding: 6px 6px 2px;
+      font-family: "Elephant", Georgia, serif;
+      letter-spacing: .5px;
+      font-size: 14px;
+    }
+
+    .badge img{
+      display:block;
+      width: 100%;
+      height: auto;
+      border-bottom: 1px dotted var(--border);
+    }
+
+    .masthead{
+      flex: 1 1 auto;
+      border: 1px dashed var(--border);
+      background: var(--paper);
+      color: var(--ink);
+      box-shadow: 2px 2px 0 var(--shadow);
+    }
+
+    .masthead .stripe{
+      background: var(--accent);
+      color: #fff;
+      padding: 4px 10px;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: .4px;
+    }
+
+    .masthead .hero{
+      position: relative;
+      padding: 0;
+      overflow:hidden;
+      background: #000;
+    }
+
+    .masthead .hero img{
+      display:block;
+      width: 100%;
+      height: auto;
+    }
+
+    .masthead .tagline{
+      padding: 8px 10px 10px;
+      font-family: Arial, sans-serif;
+      font-size: 22px;
+      line-height: 1.05;
+    }
+
+    .navStrip{
+      margin-top: 10px;
+      background: var(--paper);
+      color: var(--ink);
+      border: 1px dashed var(--border);
+      box-shadow: 2px 2px 0 var(--shadow);
+      padding: 8px 10px;
+      font-family: var(--pixel);
+      font-size: 13px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .layout{
+      display:grid;
+      grid-template-columns: 180px 1fr;
+      gap: 12px;
+      margin-top: 12px;
+      align-items:start;
+    }
+
+    @media (max-width: 740px){
+      .layout{ grid-template-columns: 1fr; }
+      .badge{ width: 180px; }
+      .topbar{ flex-wrap: wrap; }
+    }
+
+    .panel{
+      background: var(--paper);
+      color: var(--ink);
+      border: 1px dashed var(--border);
+      box-shadow: 2px 2px 0 var(--shadow);
+    }
+
+    .panel .title{
+      background: #000;
+      color: #fff;
+      padding: 7px 10px;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .panel .body{
+      padding: 10px 10px 12px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #000;
+    }
+
+    .sidebar{
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .menu{
+      padding: 10px;
+    }
+
+    .menu a{
+      display:block;
+      background: var(--paper);
+      color: #000;
+      border: 1px dashed var(--border);
+      padding: 6px 8px;
+      margin: 6px 0;
+      text-decoration:none;
+      font-family: var(--ui);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .menu a:hover{
+      outline: 1px dotted var(--accent);
+      background: #fff7f7;
+    }
+
+    .paypalBox{
+      padding: 8px 10px 12px;
+      text-align:center;
+    }
+    .menuDots a{
+        position: relative;
+        padding-left: 26px;
+      }
+    .menuDots a::before{
+        content: "";
+        position: absolute;
+        left: 8px;
+        top: 50%;
+        width: 12px;
+        height: 12px;
+        transform: translateY(-50%);
+        border-radius: 999px;
+        background: #b00000;          /* red dot */
+        border: 1px solid #600000;
+        box-shadow: 1px 1px 0 rgba(0,0,0,.18);
+      }
+    .menuDots a.is-current::before,
+    .menuDots a[aria-current="page"]::before{
+        background: #ffffff;             /* white dot for current page */
+        border-color: #b00000;
+      }
+
+    .quote{
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      color: #000;
+    }
+
+    .quote .q{
+      font-style: italic;
+      margin: 0 0 6px;
+    }
+
+    .quote .by{
+      margin: 0;
+      text-align:right;
+      font-family: var(--pixel);
+    }
+
+    .footer{
+      margin-top: 14px;
+      text-align:center;
+      font-family: var(--pixel);
+      font-size: 12px;
+      color: #ddd;
+    }
+
+    .tiny{
+      font-size: 11px;
+      color: #222;
+      font-family: var(--pixel);
+    }
+
+    .btnRow{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    /* Accessibility helpers */
+    .skip{
+      position:absolute;
+      left:-9999px;
+      top:auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+    }
+    .skip:focus{
+      left: 12px;
+      top: 12px;
+      width:auto;
+      height:auto;
+      padding:8px 10px;
+      background:#fff;
+      color:#000;
+      border:1px solid var(--border);
+      z-index:9999;
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="page">
+    <header class="topbar" role="banner">
+      <div class="badge panel" aria-label="Send Bob To Mars badge">
+        <a href="http://www.sendbobtomars.com/" title="Send Bob To Mars (home)">
+          <img src="../images/marsherd.jpg" alt="Mars sheep badge image">
+          Send Bob To Mars
+        </a>
+      </div>
+
+      <div class="masthead" aria-label="Site header">
+        <div class="stripe">Send Bob To Mars, for the love of god!</div>
+        <div class="hero" aria-hidden="true">
+          <img src="../images/banner.gif" alt="">
+        </div>
+        <div class="tagline">Send Bob To Mars!</div>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Sidebar">
+        <div class="panel">
+          <nav class="menu menuDots" aria-label="Main menu">
+        <span><a href="../index.html">Home</a></span>
+            <a href="sendbob.html">Send Bob To Mars!</a>
+            <a href="packinglist.html">Mars Packing List</a>
+            <a href="mysheep.html">My Sheep</a>
+            <a href="why.html">Why?</a>
+            <a href="masterplanfinalfinal.html">My Plan</a>
+            <a href="bloog.html">Journal/Blog</a>
+            <a href="mailto:bob@sendbobtomars.com?subject=I%20love%20your%20site!%20%20Also,%20here%20is%20$1%20for%20your%20noble%20yet%20wondrous%20journey!">Contact Me</a>
+            <a href="guestbook.html">Guest Book</a>          </nav>
+          
+        </div>
+
+        
+        <div class="panel quote" aria-label="Quote">
+          <p class="q">Hey, Bob, it's Elon...again...You're really gonna want to hear what I'm working on.  Call me back.</p>
+          <p class="by">- 11/14/2004 Voicemail Transcript</p>
+          <p class="by"></p>
+        </div>
+        
+        <div class="panel paypalBox" aria-label="Donate with PayPal">
+          <form >
+            
+            <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but21.gif" name="submit"
+                   alt="Donate with PayPal">
+          </form>
+          <div class="tiny">Paypal or large bills or rocketships or sheep chow accepted</div>
+        </div>
+        
+      </aside>
+
+      <main id="main" class="panel" role="main">
+        <div class="title">Packing List</div>
+        <div class="body">
+          <p>Due to an overwhelming response of hundreds of thousands of emails and phone calls, I am detailing my family of sheep here.  Each one is special in his or her own lil way. </p>
+          <p>The six sheep I bring are unique and varied, as you can see...
+          </p>
+          <table class="sheep-table" aria-label="Sheep list">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Comment</th>
+                <th scope="col" class="pic-col">Pic &amp; Breed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="name">SPANKY</td>
+                <td class="comment">Oh Spanky, what would I do without you and your crazy, wacky ramblings. How you can go on and ON about nothing at all...</td>
+                <td class="pic">
+                  <img src="../images/spanky.jpg" alt="Spanky the sheep">
+                  <span class="breed">(Delaine Merino)</span> 
+                </td>
+              </tr>
+              <tr>
+                <td class="name">POOKY</td>
+                <td class="comment">Ah, my favorite practical joker. I’ll never forget that time with the whip cream and super glue and cucumbers. The hospital visit was expensive and embarrassing, but OH how I laugh now, looking back.</td>
+                <td class="pic">
+                  <img src="../images/pooky.jpg" alt="Pooky the sheep">
+                  <span class="breed">(Boorola Merino)</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="name">SLAPPY</td>
+                <td class="comment">I remember when we first got the lass. She was shy and timid at first, but with a fine mash of corn and whiskey, she soon grew to teach US a thing or two. And don’t butt heads with her, she’ll leave you on the floor! Also, she’s an alcoholic.</td>
+                <td class="pic">
+                  <img src="../images/slappy.jpg" alt="Pooky the sheep">
+                  <span class="breed">(Barbado)</span>
+                </td>
+                 
+              </tr>
+              <tr>
+                <td class="name">SNOOKY</td>
+                <td class="comment">Ah Snooky, my favorite (but don’t tell the others that!) I think my favorite memory of Snooky was the sight of her sailing in from Botswana on that old rickety boat, smiling as if she was the cat’s meow, and sauntering up to me as if we had known each other for a hundred years. Then, she backkicked me in the groin to let me know who’s boss. Don’t worry, Snooky, I know. I know!</td>
+                <td class="pic">
+                  <img src="../images/snooky.jpg" alt="Pooky the sheep">
+                  <span class="breed">(Dorper)</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="name">WINKY</td>
+                <td class="comment">Ah, the gentle, wise soul of Winky. She is so soft and tender, she would make a fine gyro with cucumber sauce. Don’t worry, Winky, not until I’m out of White Castle.</td>
+                <td class="pic">
+                  <img src="../images/winky.jpg" alt="Pooky the sheep">
+                  <span class="breed">(Wiltshire Horn)</span>
+                </td>
+              </tr>
+              <tr>
+                <td class="name">TIM</td>
+                <td class="comment">Tim, you bastard. I never wanted you. You were a mistake. You’re only in the group ’cause I need six. You better hope I don’t find another sheep by the time my rocket ship is built.</td>
+                <td class="pic">
+                  <img src="../images/tim.jpg" alt="Pooky the sheep">
+                  <span class="breed">(German Merino)</span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          
+            
+           
+        </div>
+      </main>
+    </div>
+
+    <footer class="footer" role="contentinfo">
+      <nav class="navStrip" aria-label="Top navigation">
+        <span><a href="../index.html">Home</a></span>
+        <span> | </span><a href="sendbob.html">Send Bob!</a>
+        <span> | </span>My Sheep
+        <span> | </span><a href="packinglist.html">Packing List</a>
+        <span> | </span><a href="why.html">WHY?</a>
+        <span> | </span><a href="masterplanfinalfinal.html">My Plan</a>
+        <span> | </span><a href="packinglist.html">Page Title</a>
+        <span> | </span><a href="bloog.html">Journal/Blog</a>
+      </nav>
+     
+      <div style="margin-top:10px">Send Bob To Mars, for the love of god!</div>
+      <div style="margin-top:10px">this site is a faithful reproduction of sendbobtomars.com dedicated to the memory of its original author</div>
+    </footer>
+  </div>
+  <script>
+    (function () {
+      const nav = document.querySelector('.menuDots');
+      if (!nav) return;
+  
+      const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+      const links = nav.querySelectorAll('a[href]');
+  
+      let matched = null;
+      for (const a of links) {
+        const href = a.getAttribute('href');
+        if (!href) continue;
+        if (/^(mailto:|tel:|https?:)/i.test(href)) continue;
+  
+        const target = href.split('#')[0].split('?')[0].split('/').pop().toLowerCase();
+        if (target === current) { matched = a; break; }
+      }
+  
+      if (matched) {
+        matched.classList.add('is-current');
+        matched.setAttribute('aria-current', 'page');
+      }
+    })();
+  </script>
+  
+
+</body>
+</html>
