@@ -26,7 +26,7 @@ Bob recognized the limitless potential bubbling just below the surface of the in
 
 He devised a plan and built himself a platform from which he could share his dream and give the public an opportunity to contribute to a project that would have reshaped the course of human history.
 
-Tragically, before the project could gain enough momentum to catapult it into the zeitgeist of the internet, Bob was taken from this world.
+Tragically, before the project could gain enough momentum to catapult it into the zeitgeist of the internet, Bob was taken from this world by a heart defect rather than a space ship.
 
 
 For the brief moment in time that the page was live, sendbobtomars.com existed as Bob's gift to the world that gave us all a small glimpse into the mind of man truly ahead of his time.
